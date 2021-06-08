@@ -1,0 +1,49 @@
+version: "3"
+services:
+    mariadb:
+        image: mariadb
+        container_name: mysql
+        restart: always
+        ports:
+            - 3306:3306
+        networks: 
+            - development
+        environment:
+            MYSQL_ROOT_PASSWORD: 1qaz2ws
+        volumes:
+            - development:/var/lib/mysql
+    redis:
+        image: redis
+        container_name: redis
+        restart: always
+        ports:
+            - 6379:6379
+        networks: 
+            - development
+        command: redis-server --requirepass 1qaz2ws
+        volumes:
+            - development/:/data
+
+    mongo:
+        image: mongo
+        container_name: mongo
+        restart: always
+        ports:
+            - 27017:27017
+        networks:
+            - development
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: 1qaz2wsx
+        volumes:
+            - development/:/data/db
+
+volumes:
+    development:
+        name: development 
+        external: true
+
+networks:
+    development:
+        external: true
+        name: development
