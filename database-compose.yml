@@ -9,7 +9,7 @@ services:
         networks: 
             - development
         environment:
-            MYSQL_ROOT_PASSWORD: 1qaz2ws
+            MARIADB_ROOT_PASSWORD: 1qaz2ws
         volumes:
             - development:/var/lib/mysql
     redis:
